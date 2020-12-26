@@ -7,7 +7,7 @@ const firebaseConfig = {
     projectId: "vueproject1-74f6c",
     storageBucket: "vueproject1-74f6c.appspot.com",
     messagingSenderId: "70211203430",
-    appId: "1:70211203430:web:65b807aa89166e25f158a7"
+    appId: "1:70211203430:web:eb678ebee1c97637f158a7"
   };
 
   //init firebase
@@ -15,5 +15,6 @@ const firebaseConfig = {
 
   //init firestore
   const projectFirestore = firebase.firestore()
+  const timestamp = firebase.firestore.FieldValue.serverTimestamp
 
-  export { projectFirestore }
+  export { projectFirestore, timestamp }

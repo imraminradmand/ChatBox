@@ -1,12 +1,17 @@
 <template>
   <div class="welcome container">
       <p>welcome</p>
+      <SignupForm/>
+      <LoginForm/>
   </div>
 </template>
 
 <script>
-export default {
 
+import SignupForm from '../components/SignupForm.vue'
+import LoginForm from '../components/LoginForm.vue'
+export default {
+    components: { SignupForm, LoginForm}
 }
 </script>
 

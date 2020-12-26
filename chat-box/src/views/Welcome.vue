@@ -54,4 +54,12 @@ export default {
         color: #999;
         margin: 10px auto;
     }
+    .welcome span{
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    }
+    .welcome button {
+        margin: 20px auto;
+    }
 </style>

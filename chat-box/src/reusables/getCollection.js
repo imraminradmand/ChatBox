@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { projectFirestore } from '../firebase/config';
 
 const getCollection = (collection) => {
@@ -7,7 +7,7 @@ const getCollection = (collection) => {
 
     let collectionRef = projectFirestore.collection(collection).orderBy('createdAt')
     //realtime listener 
-    collectionRef.onSnapshot((snap) => {
+    const unsub = collectionRef.onSnapshot((snap) => {
         let res = []
         snap.docs.forEach( doc => {
             doc.data().createdAt && res.push({...doc.data(), id: doc.id})
@@ -19,6 +19,11 @@ const getCollection = (collection) => {
         chats.value = null
         error.value = 'could not fetch chat data'
     }) 
+
+    //unsub from old collection when component unmounts
+    watchEffect((onInvalidate) => {
+        onInvalidate(() => unsub())
+    })
 
     return { chats, error}
 

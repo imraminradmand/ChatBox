@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <Nav/>
+        <NewChatForm/>
     </div>
 </template>
 
@@ -11,9 +12,10 @@ import Nav from '../components/Nav.vue'
 import getCurrentUser from '../reusables/getCurrentUser'
 import { watch } from 'vue'
 import { useRouter } from 'vue-router'
+import NewChatForm from '../components/NewChatForm.vue'
 
 export default {
-    components: { Nav },
+    components: { Nav, NewChatForm },
 
     setup() {
         const { user } = getCurrentUser()

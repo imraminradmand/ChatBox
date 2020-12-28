@@ -3,7 +3,7 @@
       <div v-if="error">
           {{ error }}
       </div>
-      <div class="messages" v-if="chats">
+      <div class="messages" v-if="chats" ref='msg'>
           <div v-for="chat in formattedTime" :key="chat.id" class="msg">
               <span class="time">{{ chat.createdAt}}</span>
               <span class="name">{{ chat.name }}</span>
@@ -17,7 +17,7 @@
 
 import getCollection from '../reusables/getCollection'
 import { formatDistanceToNow } from 'date-fns'
-import { computed } from 'vue'
+import { computed, onUpdated, ref } from 'vue'
 
 export default {
     setup() {
@@ -32,7 +32,14 @@ export default {
             }
         })
 
-        return { error, chats, formattedTime }
+        //auto scroll chat window
+        const msg = ref(null)
+
+        onUpdated(() => {
+            msg.value.scrollTop = msg.value.scrollHeight
+        })
+
+        return { error, chats, formattedTime, msg }
     }
 }
 </script>

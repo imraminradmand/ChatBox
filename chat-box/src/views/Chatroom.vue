@@ -1,11 +1,14 @@
 <template>
-  <h2>chatroom
-  </h2>
+    <div class="container">
+        <Nav/>
+    </div>
 </template>
 
 <script>
-export default {
 
+import Nav from '../components/Nav.vue'
+export default {
+    components: { Nav }
 }
 </script>
 

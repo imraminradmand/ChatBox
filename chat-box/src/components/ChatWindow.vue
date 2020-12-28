@@ -4,8 +4,8 @@
           {{ error }}
       </div>
       <div class="messages" v-if="chats">
-          <div v-for="chat in chats" :key="chat.id" class="msg">
-              <span class="time">{{ chat.createdAt.toDate() }}</span>
+          <div v-for="chat in formattedTime" :key="chat.id" class="msg">
+              <span class="time">{{ chat.createdAt}}</span>
               <span class="name">{{ chat.name }}</span>
               <span class="message"> {{ chat.message }}</span>
           </div>
@@ -16,11 +16,23 @@
 <script>
 
 import getCollection from '../reusables/getCollection'
+import { formatDistanceToNow } from 'date-fns'
+import { computed } from 'vue'
+
 export default {
     setup() {
         const { error, chats } = getCollection('messages')
 
-        return { error, chats }
+        const formattedTime = computed(() => {
+            if(chats.value) {
+                return chats.value.map(chat => {
+                    let time = formatDistanceToNow(chat.createdAt.toDate())
+                    return { ...chat, createdAt: time}
+                })
+            }
+        })
+
+        return { error, chats, formattedTime }
     }
 }
 </script>
